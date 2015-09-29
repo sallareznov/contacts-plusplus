@@ -3,13 +3,14 @@ package com.example.tello.contacts;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.util.Log;
 
 /**
  * Created by tello on 28/09/15.
  */
 public class MyDialog {
-    public MyDialog(String message, Context context) {
+    public MyDialog(String message, final Context context) {
 
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
 

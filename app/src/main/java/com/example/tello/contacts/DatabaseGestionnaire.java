@@ -29,11 +29,9 @@ public class DatabaseGestionnaire extends OrmLiteBaseActivity<Database> {
         return dao.queryForAll();
     }
 
-    public void printDataToTextView(List<Data> data, TextView tv) {
+    public void printDataToTextView(Data data, TextView tv) {
         StringBuilder sb = new StringBuilder();
-        for (Data simple : data) {
-            sb.append('#').append(simple).append('\n');
-        }
+        sb.append(data.nom).append('\n').append(data.telephone);
         tv.setText(sb.toString());
     }
 }

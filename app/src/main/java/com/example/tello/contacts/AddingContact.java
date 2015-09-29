@@ -44,11 +44,14 @@ public class AddingContact extends OrmLiteBaseActivity<Database> {
                             mail.getText().toString(),
                             Double.valueOf(lat.getText().toString()),
                             Double.valueOf(lon.getText().toString())));
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(intent);
                 }else {
-                    new MyDialog("You shoud fill the formula", getApplicationContext());
+                   new MyDialog("You shoud fill the formula", AddingContact.this);
+
+
                 }
-               // Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-               // startActivity(intent);
+
             }
         });
     }

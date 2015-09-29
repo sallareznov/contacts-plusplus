@@ -9,10 +9,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.j256.ormlite.android.apptools.OrmLiteBaseActivity;
 import com.j256.ormlite.dao.RuntimeExceptionDao;
+
+import java.util.List;
 
 /**
  * Created by tello
@@ -20,7 +23,6 @@ import com.j256.ormlite.dao.RuntimeExceptionDao;
 public class MainActivity extends OrmLiteBaseActivity<Database> {
 
     private final String LOG_TAG = getClass().getSimpleName();
-    private TextView tv;
     private RuntimeExceptionDao<Data, Integer> dao;
 
     @Override
@@ -29,14 +31,15 @@ public class MainActivity extends OrmLiteBaseActivity<Database> {
         Log.i(LOG_TAG, "creating " + getClass() + " at " + System.currentTimeMillis());
         setContentView(R.layout.contacts_list);
         dao = getHelper().getSimpleDataDao();
-
-        tv = new TextView(this);
-        tv.setMovementMethod(new ScrollingMovementMethod());
-        ((FrameLayout) findViewById(R.id.mainLayout)).addView(tv);
         DatabaseGestionnaire DBG = new DatabaseGestionnaire(dao);
-        DBG.printDataToTextView(DBG.readData(), tv);
-
-
+        List<Data>  listData = DBG.readData();
+        for (Data data : listData){
+            TextView tv;
+            tv = new TextView(this);
+            tv.setMovementMethod(new ScrollingMovementMethod());
+            ((LinearLayout) findViewById(R.id.mainLayout)).addView(tv);
+            DBG.printDataToTextView(data, tv);
+        }
 
         Button goToAddingMenu = (Button) findViewById(R.id.button);
         goToAddingMenu.setOnClickListener(new View.OnClickListener() {
