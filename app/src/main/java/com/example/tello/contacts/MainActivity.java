@@ -8,13 +8,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.j256.ormlite.android.apptools.OrmLiteBaseActivity;
 import com.j256.ormlite.dao.RuntimeExceptionDao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,6 +24,8 @@ public class MainActivity extends OrmLiteBaseActivity<Database> {
 
     private final String LOG_TAG = getClass().getSimpleName();
     private RuntimeExceptionDao<Data, Integer> dao;
+    private TextView textView;
+    private static int COUNTER;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,12 +35,21 @@ public class MainActivity extends OrmLiteBaseActivity<Database> {
         dao = getHelper().getSimpleDataDao();
         DatabaseGestionnaire DBG = new DatabaseGestionnaire(dao);
         List<Data>  listData = DBG.readData();
-        for (Data data : listData){
-            TextView tv;
-            tv = new TextView(this);
-            tv.setMovementMethod(new ScrollingMovementMethod());
-            ((LinearLayout) findViewById(R.id.mainLayout)).addView(tv);
-            DBG.printDataToTextView(data, tv);
+        for (final Data data : listData){
+            textView = new TextView(this);
+            textView.setId(COUNTER++);
+            textView.setMovementMethod(new ScrollingMovementMethod());
+            textView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getApplicationContext(), ContactDetail.class);
+                    intent.putExtra("id", data.id);
+                    startActivity(intent);
+                }
+
+            });
+            ((LinearLayout) findViewById(R.id.mainLayout)).addView(textView);
+            DBG.printDataToTextView(data, textView);
         }
 
         Button goToAddingMenu = (Button) findViewById(R.id.button);

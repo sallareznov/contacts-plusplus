@@ -25,6 +25,16 @@ public class DatabaseGestionnaire extends OrmLiteBaseActivity<Database> {
         dao.delete(data);
     }
 
+    public Data getDataById(int id){
+        List<Data> list = readData();
+        for (Data data : list){
+            if (data.id == id){
+                return data;
+            }
+        }
+        return null;
+    }
+
     public List<Data> readData() {
         return dao.queryForAll();
     }
