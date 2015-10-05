@@ -8,12 +8,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.j256.ormlite.android.apptools.OrmLiteBaseActivity;
 
 public class ContactDetail extends OrmLiteBaseActivity<Database> {
     private Data contact;
     private DatabaseGestionnaire DBG;
+    private GPSTracker gps;
+
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -35,11 +38,16 @@ public class ContactDetail extends OrmLiteBaseActivity<Database> {
                 startActivity(intent);
             }
         });
-
+        gps = new GPSTracker(getApplicationContext());
         Button calculatingDistance = (Button) findViewById(R.id.distance);
-        deleteingContact.setOnClickListener(new View.OnClickListener() {
+        calculatingDistance.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-
+                if(gps.canGetLocation()) {
+                    double latitude = gps.getLatitude();
+                    double longitude = gps.getLongitude();
+                    String s = "distance:" + DistanceCalculator.distance(latitude,longitude,contact.latitidue,contact.longitdue,"K")+ "KM";
+                    Toast.makeText(getApplicationContext(), s, Toast.LENGTH_LONG).show();
+                }
             }
         });
 
