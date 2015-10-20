@@ -51,6 +51,19 @@ public class ContactDetail extends OrmLiteBaseActivity<Database> {
             }
         });
 
+        Button map = (Button) findViewById(R.id.map);
+        map.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), ContactMap.class);
+                intent.putExtra("lat", contact.latitidue);
+                intent.putExtra("lon", contact.longitdue);
+                intent.putExtra("name", contact.nom);
+                startActivity(intent);
+            }
+        });
+
+
+
     }
 
     @Override

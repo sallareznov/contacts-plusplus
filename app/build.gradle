@@ -24,4 +24,6 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.0.1'
     compile 'com.j256.ormlite:ormlite-android:4.48'
     compile 'com.j256.ormlite:ormlite-core:4.48'
+    compile 'com.google.android.gms:play-services-maps:6.5.87'
+
 }
