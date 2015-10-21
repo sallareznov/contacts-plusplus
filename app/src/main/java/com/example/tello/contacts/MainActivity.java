@@ -82,6 +82,7 @@ public class MainActivity extends OrmLiteBaseActivity<Database> {
 
                     double latitude = gps.getLatitude();
                     double longitude = gps.getLongitude();
+                    Log.i("GPS","lat:"+latitude+" long:"+longitude);
                     Map<Double, Data> treeMap = new TreeMap<Double, Data>();
                     for (final Data data : contacts){
                         treeMap.put(DistanceCalculator.distance(longitude, latitude, data.longitdue, data.latitidue, "K"), data);

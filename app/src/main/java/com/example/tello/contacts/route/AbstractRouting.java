@@ -11,6 +11,7 @@ package com.example.tello.contacts.route;
  */
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.PolylineOptions;
@@ -112,6 +113,7 @@ public abstract class AbstractRouting extends AsyncTask<Void, Void, ArrayList<Ro
      */
     @Override
     protected ArrayList<Route> doInBackground(Void... voids) {
+        Log.i("INFO", "DOING IN BACKGROUND"+constructURL());
         return new GoogleParser(constructURL()).parse();
     }
 
