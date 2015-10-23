@@ -36,12 +36,11 @@ public class Data {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("id=").append(id);
-        sb.append(", ").append(nom);
-        sb.append("\n ").append(telephone);
-        sb.append("\n ").append("Email=").append(Email);
-        sb.append("\n ").append("latitude=").append(latitidue);
-        sb.append(", ").append("longitude=").append(longitdue);
+        sb.append("Name: ").append(nom);
+        sb.append("\n---------------------\n").append("Telephone: ").append(telephone);
+        sb.append("\n---------------------\n").append("Email: ").append(Email);
+        sb.append("\n---------------------\n").append("Latitude: ").append(latitidue);
+        sb.append("\n---------------------\n").append("longitude=").append(longitdue);
         return sb.toString();
     }
 }
